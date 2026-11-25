@@ -21,6 +21,12 @@ def emi(p, r, n):
 def total_amount(p, r, t):
     """Return the total amount payable (Principal + Simple Interest)."""
     return round(p + simple_interest(p, r, t), 2)
+def compound_interest(p, r, t, freq=1):
+    """Return the compound interest for principal p, annual rate r (%), time t (years), compounded freq times/year."""
+    if p <= 0 or r < 0 or t <= 0 or freq <= 0:
+        raise ValueError("Principal, time, and compounding frequency must be positive; rate cannot be negative.")
+    amount = p * ((1 + (r / (100 * freq))) ** (freq * t))
+    return round(amount - p, 2)
 
 
 if __name__ == "__main__":
@@ -30,3 +36,4 @@ if __name__ == "__main__":
     print("emi(500000, 10, 60):", emi(500000, 10, 60))
     print("total_amount(10000, 5, 2):", total_amount(10000, 5, 2))
     print("total_amount(50000, 8.5, 3):", total_amount(50000, 8.5, 3))
+    
